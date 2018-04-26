@@ -37,7 +37,7 @@ def show_todo_list():
             todolist = TodoList(current_user.id, form.title.data, form.status.data)
             db.session.add(todolist)
             db.session.commit()
-            flash('You have add a new todo list')
+            flash('Сіз жаңа todo тізімін қосдыңыз')
         else:
             flash(form.errors)
         return redirect(url_for('show_todo_list'))
@@ -49,7 +49,7 @@ def delete_todo_list(id):
      todolist = TodoList.query.filter_by(id=id).first_or_404()
      db.session.delete(todolist)
      db.session.commit()
-     flash('You have delete a todo list')
+     flash('Жөндеу тізімін жойдыңыз')
      return redirect(url_for('show_todo_list'))
 
 
@@ -69,7 +69,7 @@ def change_todo_list(id):
             todolist.title = form.title.data
             todolist.status = form.status.data
             db.session.commit()
-            flash('You have modify a todolist')
+            flash('Сіз todolist-ты өзгерттіңіз')
         else:
             flash(form.errors)
         return redirect(url_for('show_todo_list'))
@@ -81,10 +81,10 @@ def login():
         user = User.query.filter_by(username=request.form['username'], password=request.form['password']).first()
         if user:
             login_user(user)
-            flash('you have logged in!')
+            flash('Сіз тіркелдіңіз!')
             return redirect(url_for('show_todo_list'))
         else:
-            flash('Invalid username or password')
+            flash('Пайдаланушы аты немесе құпия сөз жарамсыз')
     form = LoginForm()
     return render_template('login.html', form=form)
 
@@ -93,7 +93,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('you have logout!')
+    flash('сізде шығу бар!')
     return redirect(url_for('login'))
 
 
